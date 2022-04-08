@@ -8,13 +8,12 @@ public class GridCreator : MonoBehaviour
     public GameObject parent_gameObject;
     public GameObject grid_prefap;
     public GameObject last_grid;
-    GameObject first_grid;
-
-    GameObject last_grid_line;
     
+    GameObject first_grid;
+    GameObject last_grid_line;
+
     [Header("Valueables")]
-    public float last_x_value;
-    public float last_z_value;
+    [SerializeField] Vector2 lastValues = new Vector2(9,-8);
     public float offset;
 
     [Header("Grid Datas")]
@@ -48,7 +47,7 @@ public class GridCreator : MonoBehaviour
     void CreateGrids() 
     {
         CreateGridLine();
-        while (last_grid_line.transform.position.z - offset >= last_z_value)
+        while (last_grid_line.transform.position.z - offset >= lastValues.y)
         {            
             //Create new Grid Line 
             GameObject newLine = Instantiate(grid_prefap, new Vector3(last_grid_line.transform.position.x, last_grid_line.transform.position.y,last_grid_line.transform.position.z-offset), Quaternion.identity, parent_gameObject.transform);
@@ -71,7 +70,7 @@ public class GridCreator : MonoBehaviour
     void CreateGridLine() 
     {
         x_pos = 0;
-        while (last_grid.transform.position.x + offset <= last_x_value)
+        while (last_grid.transform.position.x + offset <= lastValues.x)
         {
             //Create new Grid
             GameObject newGrid = Instantiate(grid_prefap, new Vector3(last_grid.transform.position.x + offset, last_grid.transform.position.y, last_grid_line.transform.position.z), Quaternion.identity, parent_gameObject.transform);
@@ -94,7 +93,7 @@ public class GridCreator : MonoBehaviour
 
 
         }
-        if(last_grid_line.transform.position.z - offset >= last_z_value) last_grid = last_grid_line;
+        if(last_grid_line.transform.position.z - offset >= lastValues.y) last_grid = last_grid_line;
     }
 
   

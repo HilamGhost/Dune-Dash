@@ -13,24 +13,16 @@ public class PlayerController : MonoBehaviour
     public int PlayerGridID;
     public  Vector3 targetPos;
     public bool canMove = true;
-    GridController gridManager;
+    GridController GridManager { get {return GridController.gridController;} }
     public Vector2 direction;
 
     [Header("Visual")]
     public Animator player_animator;
     public ParticleSystem step_particle;
-    // Start is called before the first frame update
-    void Start()
-    {
-        gridManager = GridController.gridController;
-      
-    }
 
-    // Update is called once per frame
     void Update()
     {
         canMove = GameManager.gameManager.canMove;
-       
 
         if (targetPos != transform.position) 
         {
@@ -59,11 +51,9 @@ public class PlayerController : MonoBehaviour
                 for (int i = 0; i < step_number; i++)
                 {
                    
-                    if (transform.localPosition.z + move_speed <= gridManager.first_grid.localPosition.z + 1) Move(0, 1); else break;
+                    if (transform.localPosition.z + move_speed <= GridManager.first_grid.localPosition.z + 1) Move(0, 1); else break;
                     direction = new Vector2(0,1);
                     yield return new WaitForSeconds(1);
-                    
-
                 }
                 
                 yield return new WaitForSeconds(1);
@@ -72,13 +62,10 @@ public class PlayerController : MonoBehaviour
             case (-1, 0): //DOWN
                 for (int i = 0; i < step_number; i++)
                 {
-                   
-                    if (transform.localPosition.z - move_speed >= gridManager.last_grid.localPosition.z - 1) Move(0, -1); else break;
+                    
+                    if (transform.localPosition.z - move_speed >= GridManager.last_grid.localPosition.z - 1) Move(0, -1); else break;
                     direction = new Vector2(0, -1);
-                    yield return new WaitForSeconds(1);
-                    
-                    
-                    
+                    yield return new WaitForSeconds(1);         
                 }
                 
                 yield return new WaitForSeconds(1);
@@ -86,14 +73,10 @@ public class PlayerController : MonoBehaviour
                 break;
             case (0, -1): //LEFT
                 for (int i = 0; i < step_number; i++)
-                {
-                    
-                    if (transform.localPosition.x - move_speed >= gridManager.first_grid.localPosition.x - 0.5f) Move(-1, 0); else break;
+                {                    
+                    if (transform.localPosition.x - move_speed >= GridManager.first_grid.localPosition.x - 0.5f) Move(-1, 0); else break;
                     direction = new Vector2(-1, 0);
-                    yield return new WaitForSeconds(1);
-                    
-                    
-                    
+                    yield return new WaitForSeconds(1);             
                 }
                 
                 yield return new WaitForSeconds(1);
@@ -101,14 +84,10 @@ public class PlayerController : MonoBehaviour
                 break;
             case (0, 1): //RIGHT
                 for (int i = 0; i < step_number; i++)
-                {
-                    
-                    if (transform.localPosition.x + move_speed <= gridManager.last_grid.localPosition.x + 0.5f) Move(1, 0); else break;
+                {                 
+                    if (transform.localPosition.x + move_speed <= GridManager.last_grid.localPosition.x + 0.5f) Move(1, 0); else break;
                     direction = new Vector2(1, 0);
-                    yield return new WaitForSeconds(1);
-                   
-                    
-                    
+                    yield return new WaitForSeconds(1);                                               
                 }
                 
                 yield return new WaitForSeconds(1);

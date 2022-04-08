@@ -20,6 +20,15 @@ public class GridData : MonoBehaviour
     public int x_pos;
     public int z_pos;
 
+    public Renderer Renderer 
+    {
+        get
+        {
+             return GetComponent<Renderer>();
+        }
+        
+    }
+
 
 
     [Header("Visual")]
@@ -43,17 +52,17 @@ public class GridData : MonoBehaviour
             switch (gridType)
             {
                 case GridTypes.Empty:
-                    GetComponent<Renderer>().material.color = new Color(0.8679245f, 0.5575108f, 0.3152367f, 1);
+                    Renderer.material.color = new Color(0.8679245f, 0.5575108f, 0.3152367f, 1);
                     break;
                 case GridTypes.Start:
-                    GetComponent<Renderer>().material.color = Color.green;
+                    Renderer.material.color = Color.green;
                     break;
                 case GridTypes.Exit:
-                    GetComponent<Renderer>().material.color = Color.blue;
+                    Renderer.material.color = Color.blue;
                     ExitGate.SetActive(true);
                     break;
                 case GridTypes.Star:
-                    GetComponent<Renderer>().material.color = Color.yellow;
+                    Renderer.material.color = Color.yellow;
                     StarModel.SetActive(true);
                     break;
                 case GridTypes.Obstacle:
@@ -64,7 +73,7 @@ public class GridData : MonoBehaviour
         }
         else 
         {
-            GetComponent<Renderer>().material.color = new Color(0.3137255f, 0.8387181f, 0.8666667f,1);          
+            Renderer.material.color = new Color(0.3137255f, 0.8387181f, 0.8666667f,1);          
         }
 
         SelectedObjectPS.SetActive(isSelected);

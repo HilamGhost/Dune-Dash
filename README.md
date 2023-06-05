@@ -13,3 +13,5 @@ go_direction_stepnumber = Moves player to direction.
 obs_obsID_destroy = Destroys the obstacle. 
 
 & = Allows the multiple commands.
+[Itch.io link](https://hilamghost.itch.io/dunedash)
+
